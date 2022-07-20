@@ -27,28 +27,50 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/index';
+    protected $redirectTo = '/index'; //分からない
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct() //分からない
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout'); //分からない
     }
 
-    public function login(Request $request){
-        if($request->isMethod('post')){
 
-            $data=$request->only('mail','password');
-            // ログインが成功したら、トップページへ
-            //↓ログイン条件は公開時には消すこと
-            if(Auth::attempt($data)){
+
+    //◎loginメソッド
+    // 『login.blade』からpost送信されたら実行される
+
+    // 『login.blade』のnameの値を$requestに持ってくる
+    public function login(Request $request)
+    {
+        // 『login.blade』からpost送信された場合に実行される
+        if ($request->isMethod('post')) {
+            // $requestのmailとpasswordの値を取得して$data変数に代入する
+            $data = $request->only('mail', 'password');
+            // $dataの値がDBに登録されているか判定し成功なら認証可/解説：attemptは認証をtrue(成功)かfalse(失敗)で返します。
+            if (Auth::attempt($data)) {
+                // 認証可の場合は『/top』URLを表示する
                 return redirect('/top');
             }
         }
+        // post送信前と認証失敗の場合は『auth.login』ファイルを表示する
         return view("auth.login");
+    }
+
+
+
+    //logoutメソッド
+    // ログアウトボタン押したら実行される
+
+    public function logout()
+    {
+        // ログインしているユーザーをログアウトする/解説：ユーザーの認証情報をクリアにする●
+        Auth::logout();
+        // 『/logout』URLにアクセスする
+        return redirect('/login');
     }
 }
