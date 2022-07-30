@@ -49,7 +49,7 @@ class LoginController extends Controller
     {
         // 『login.blade』からpost送信された場合に実行される
         if ($request->isMethod('post')) {
-            // $requestのmailとpasswordの値を取得して$data変数に代入する
+            // $requestのmailとpasswordの値を取得して$data変数に代入する/解説：onlyは引数に指定したカラムの値のみ取得する
             $data = $request->only('mail', 'password');
             // $dataの値がDBに登録されているか判定し成功なら認証可/解説：attemptは認証をtrue(成功)かfalse(失敗)で返します。
             if (Auth::attempt($data)) {

@@ -121,7 +121,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             // mailカラムに$dataのmailの値を登録する。
             'mail' => $data['mail'],
-            // passwordカラムに$dataのpasswordの値を登録する。/解説：bcryptは暗号化する処理。
+            // passwordカラムに$dataのpasswordの値を登録する。/解説：bcryptはハッシュ化する処理。
             'password' => bcrypt($data['password']),
         ]);
     }

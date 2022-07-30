@@ -80,3 +80,5 @@ Route::get('/otherProfile/{id}', 'UsersController@otherProfile');
 
 // ログアウト処理
 Route::get('/logout', 'Auth\LoginController@logout');
+
+Route::get('test', 'PostsController@test');

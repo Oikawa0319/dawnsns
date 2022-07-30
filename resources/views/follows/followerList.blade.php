@@ -69,7 +69,7 @@
       @else
 
       <!-- フォローすると表示する -->
-      <p class="btn_text"><a class="follows_get" href="/follow/{{ $user->id }}">フォローする</a></p><br><!-- フォローするリンクを表示する//follow/$user->idに移動する -->
+      <p class="btn_text"><a class="follows_get" href="/follow/{{ $user->id }}">フォローする</a></p><br>
     </div>
 
     <!-- if文終了 -->

@@ -120,4 +120,29 @@ class PostsController extends Controller
         // 『/top』URLにアクセスする
         return redirect('/top');
     }
+
+    public function test()
+    {
+        $auth = Auth::user();
+
+        // followsのDBテーブルに接続して$followCount変数に代入する
+        $followCount = DB::table('follows')
+            // followerカラムをログインしているユーザーidに絞る
+            ->where('follower', Auth::id())
+            // カラム数をカウントする
+            ->count();
+
+        // followsのDBテーブルに接続して $followerCount変数に代入する
+        $followerCount = DB::table('follows')
+            // followカラムをログインしているユーザーidに絞る
+            ->where('follow', Auth::id())
+            // カラム数をカウントする
+            ->count();
+
+        $posts = DB::table("posts")
+            ->where('user_id', Auth::id())
+            ->get();
+
+        return view("posts.test", compact("auth", "posts", "followCount", "followerCount"));
+    }
 }
